@@ -1,0 +1,24 @@
+---
+- name: Check if terraform is already installed
+  command: "ls ~/bin/terraform"
+  register: check_terraform
+  changed_when: check_terraform.rc == 2
+  failed_when: check_terraform.rc != 0 and check_terraform.rc != 2
+  tags:
+    - terraform
+
+- name: Download terraform
+  get_url:
+    url: "https://releases.hashicorp.com/terraform/{{ terraform_version }}/terraform_{{ terraform_version }}_linux_amd64.zip"
+    dest: /tmp/terraform.zip
+  when: check_terraform|changed
+  tags:
+    - terraform
+
+- name: Unzip terraform
+  unarchive:
+    src: /tmp/terraform.zip
+    dest: ~/bin/
+  when: check_terraform|changed
+  tags:
+    - terraform

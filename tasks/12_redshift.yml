@@ -1,0 +1,26 @@
+---
+- name: Install redshift
+  become: yes
+  package:
+    name: redshift
+  tags:
+    - redshift
+
+- name: Configure redshift
+  copy:
+    src: redshift.conf
+    dest: ~/.config/redshift.conf
+  tags:
+    - redshift
+
+- name: Allow redshift to access geoclue
+  become: yes
+  blockinfile:
+    path: /etc/geoclue/geoclue.conf
+    block: |
+      [redshift]
+      allowed=true
+      system=false
+      users=
+  tags:
+    - redshift

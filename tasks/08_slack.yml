@@ -1,0 +1,25 @@
+---
+- name: Check if slack is already installed
+  shell: "dpkg-query -W slack-desktop"
+  register: check_slack
+  failed_when: check_slack.rc > 1
+  changed_when: check_slack.rc == 1
+  tags:
+    - slack
+
+- name: Download slack package
+  get_url:
+    url: "https://downloads.slack-edge.com/linux_releases/slack-desktop-{{ slack_version }}-amd64.deb"
+    dest: /tmp/slack.deb
+    force: yes
+  when: check_slack|changed
+  tags:
+    - slack
+
+- name: Install slack package
+  become: yes
+  apt:
+    deb: /tmp/slack.deb
+  when: check_slack|changed
+  tags:
+    - slack

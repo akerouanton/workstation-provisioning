@@ -1,0 +1,28 @@
+---
+- name: Install common softwares
+  become: yes
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - chromium-browser
+    - xclip
+    - git
+    - passwordsafe
+    - passwd
+    - ntfs-3g
+    - traceroute
+    - httpie
+    - whois
+    - jq
+    - silversearcher-ag
+  tags:
+    - common_softwares
+
+- name: Set vim as default editor
+  become: yes
+  alternatives:
+    name: editor
+    path: /usr/bin/vim
+  tags:
+    - common_softwares

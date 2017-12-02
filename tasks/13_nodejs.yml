@@ -1,0 +1,47 @@
+---
+- name: Check if NodeJS is already installed
+  shell: dpkg-query -W nodejs
+  register: check_nodejs
+  failed_when: check_nodejs.rc > 1
+  changed_when: check_nodejs.rc == 1
+  tags:
+    - nodejs
+
+- name: Download NodeJS setup script
+  get_url:
+    url: https://deb.nodesource.com/setup_9.x
+    dest: /tmp/setup_nodejs
+    mode: 0750
+  when: check_nodejs|changed
+  tags:
+    - nodejs
+
+- name: Run NodeJS setup script
+  become: yes
+  command: /tmp/setup_nodejs
+  when: check_nodejs|changed
+  tags:
+    - nodejs
+
+- name: Install NodeJS
+  become: yes
+  package:
+    name: nodejs
+  tags:
+    - nodejs
+
+- name: Configure NPM
+  copy:
+    src: .npmrc
+    dest: ~/.npmrc
+  tags:
+    - nodejs
+
+- name: Install global NPM packages
+  npm:
+    name: "{{ item }}"
+    global: yes
+  with_items:
+    - serverless
+  tags:
+    - nodejs

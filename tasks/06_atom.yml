@@ -1,0 +1,25 @@
+---
+- name: Check if Atom is already installed
+  shell: "dpkg-query -W atom"
+  register: check_atom
+  failed_when: check_atom.rc > 1
+  changed_when: check_atom.rc == 1
+  tags:
+    - atom
+
+- name: Download Atom package
+  get_url:
+    url: https://atom.io/download/deb
+    dest: /tmp/atom.deb
+    force: yes
+  when: check_atom|changed
+  tags:
+    - atom
+
+- name: Install Atom package
+  become: yes
+  apt:
+    deb: /tmp/atom.deb
+  when: check_atom|changed
+  tags:
+    - atom

@@ -1,0 +1,36 @@
+---
+- name: Check if Keybase is already installed
+  shell: dpkg-query -W keybase
+  register: check_keybase
+  failed_when: check_keybase.rc > 1
+  changed_when: check_keybase.rc == 1
+  tags:
+    - keybase
+
+- name: Download Keybase package
+  get_url:
+    url: https://prerelease.keybase.io/keybase_{{ (ansible_architecture == 'x84_64')|ternary('amd64', 'i386') }}.deb
+    dest: /tmp/keybase.deb
+  when: check_keybase|changed
+  tags:
+    - keybase
+
+- name: Install Keybase package
+  become: yes
+  apt:
+    deb: /tmp/keybase.deb
+  register: install_keybase
+  tags:
+    - keybase
+
+- name: Run run_keybase script
+  command: run_keybase
+  when: install_keybase|changed
+  tags:
+    - keybase
+
+- name: Install gnupg-agent
+  package:
+    name: gnupg-agent
+  tags:
+    - keybase

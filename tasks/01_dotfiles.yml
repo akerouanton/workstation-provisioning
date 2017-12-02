@@ -1,0 +1,11 @@
+---
+- name: Copy dotfiles
+  copy:
+    src: "{{ item }}"
+    dest: ~/
+  with_items:
+    - .agignore
+    - .bash_aliases
+    - .bashrc
+  tags:
+    - dotfiles

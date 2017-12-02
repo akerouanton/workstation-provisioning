@@ -1,0 +1,24 @@
+---
+- name: Add mozillateam ppa
+  become: yes
+  apt_repository:
+    repo: ppa:mozillateam/firefox-next
+  register: add_mozillateam_ppa
+  tags:
+    - firefox
+
+- name: Update APT cache
+  become: yes
+  apt:
+    update_cache: yes
+  when: add_mozillateam_ppa|changed
+  tags:
+    - firefox
+
+- name: Install latest firefox
+  become: yes
+  package:
+    name: firefox
+    state: latest
+  tags:
+    - firefox

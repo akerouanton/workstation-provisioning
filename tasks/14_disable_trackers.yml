@@ -1,0 +1,24 @@
+---
+# See: https://gist.github.com/NiR-/207271eda22265e23649442c1c4a227d
+- name: List trackers enabled to autostart
+  find:
+    paths: /etc/xdg/autostart
+    patterns: tracker*
+  register: trackers
+  tags:
+    - disable_trackers
+
+- name: Configure trackers to not autostart when a session is opened
+  template:
+    src: tracker-autostart.desktop.j2
+    dest: "~/.config/autostart/{{ item.path|basename }}"
+  with_items: "{{ trackers.files }}"
+  tags:
+    - disable_trackers
+
+- name: Kill active trackers
+  shell: "killall -9 {{ item.path|basename|regex_replace('\\.desktop$', '') }}"
+  with_items: "{{ trackers.files }}"
+  ignore_errors: true
+  tags:
+    - disable_trackers

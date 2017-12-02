@@ -1,0 +1,28 @@
+[global_config]
+  broadcast_default = off
+  dbus = True
+  enabled_plugins = LaunchpadBugURLHandler, LaunchpadCodeURLHandler, APTURLHandler
+[keybindings]
+  close_window = ""
+  move_tab_left = <Primary><Shift>Down
+  move_tab_right = <Primary><Shift>Up
+  next_tab = <Primary>Up
+  prev_tab = <Primary>Down
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+[plugins]
+[profiles]
+  [[default]]
+    background_darkness = 0.82
+    background_image = None
+    background_type = transparent
+    font = Ubuntu Mono 10
+    scroll_on_output = False
+    scrollback_infinite = True
+    login_shell = True

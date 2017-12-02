@@ -1,0 +1,26 @@
+---
+- name: Install terminator
+  become: yes
+  package:
+    name: terminator
+    state: present
+  tags:
+    - terminator
+
+- name: Ensure config and plugins directories for terminator exists
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "~/.config/terminator"
+    - "~/.config/terminator/plugins"
+  tags:
+    - terminator
+
+- name: Configure terminator
+  copy:
+    src: terminator_config
+    dest: ~/.config/terminator/config
+    backup: yes
+  tags:
+    - terminator

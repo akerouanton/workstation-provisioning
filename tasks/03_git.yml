@@ -1,0 +1,32 @@
+---
+- name: Install git
+  become: yes
+  package:
+    name: git
+    state: present
+  tags:
+    - git
+
+- name: Configure git
+  template:
+    src: .gitconfig
+    dest: ~/.gitconfig
+    backup: yes
+  tags:
+    - git
+
+- name: Add global .gitignore
+  copy:
+    src: .gitignore
+    dest: ~/.gitignore
+    backup: yes
+  tags:
+    - git
+
+- name: Install git-prompt
+  git:
+    repo: 'https://github.com/magicmonty/bash-git-prompt.git'
+    dest: ~/.bash-git-prompt
+    depth: 1
+  tags:
+    - git

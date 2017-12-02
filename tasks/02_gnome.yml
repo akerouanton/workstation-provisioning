@@ -1,0 +1,28 @@
+---
+- name: Disable auto brightness
+  dconf:
+    key: "/org/gnome/settings-daemon/plugins/power/ambient-enabled"
+    value: "false"
+  tags:
+    - gnome
+
+- name: Set app switcher (alt+tab) to display only apps on current workspace
+  dconf:
+    key: "/org/gnome/shell/app-switcher"
+    value: "true"
+  tags:
+    - gnome
+
+- name: Use list view to display folders in Nautilus
+  dconf:
+    key: "/org/gnome/nautilus/preferences/default-folder-viewer"
+    value: "'list-view'"
+  tags:
+    - gnome
+
+- name: Display hidden files in Nautilus
+  dconf:
+    key: "/org/gtk/settings/file-chooser/show-hidden"
+    value: "true"
+  tags:
+    - gnome

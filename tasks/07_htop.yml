@@ -1,0 +1,22 @@
+---
+- name: Install htop
+  become: yes
+  package:
+    name: htop
+    state: present
+  tags:
+    - htop
+
+- name: Create base config directory for htop
+  file:
+    path: ~/.config/htop
+    state: directory
+  tags:
+    - htop
+
+- name: Configure htop
+  copy:
+    src: htoprc
+    dest: ~/.config/htop/htoprc
+  tags:
+    - htop

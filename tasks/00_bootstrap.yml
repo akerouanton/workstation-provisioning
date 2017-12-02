@@ -1,0 +1,39 @@
+---
+- name: Update APT cache
+  become: yes
+  apt:
+    update_cache: yes
+  tags:
+    - bootstrap
+
+- name: Install common package dependencies
+  become: yes
+  package:
+    name: "{{ item }}"
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - software-properties-common
+  tags:
+    - bootstrap
+
+- name: Install ansible dependencies
+  pip:
+    name: "{{ item }}"
+  with_items:
+    - "psutil"
+  tags:
+    - bootstrap
+
+- name: Ensure common directories exist
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - ~/bin
+    - ~/.config
+    - ~/projets/github.com/NiR-
+    - ~/projets/github.com/KnpLabs
+  tags:
+    - bootstrap

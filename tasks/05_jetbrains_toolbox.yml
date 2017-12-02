@@ -1,0 +1,32 @@
+---
+- name: Check if Jetbrains Toolbox is already installed
+  shell: "ls -lah ~/bin/jetbrains-toolbox"
+  register: check_jetbrains_toolbox
+  failed_when: false
+  changed_when: check_jetbrains_toolbox.rc == 2
+  tags:
+    - jetbrains_toolbox
+
+- name: Install Jetbrains Toolbox
+  get_url:
+    url: "https://download.jetbrains.com/toolbox/jetbrains-toolbox-{{ jetbrains_toolbox_version }}.tar.gz"
+    dest: /tmp/jetbrains_toolbox.tgz
+  when: check_jetbrains_toolbox|changed
+  tags:
+    - jetbrains_toolbox
+
+- name: Untar Jetbrains Toolbox
+  unarchive:
+    src: /tmp/jetbrains_toolbox.tgz
+    dest: ~/bin
+    remote_src: yes
+    extra_opts: ["--strip-components=1"]
+  when: check_jetbrains_toolbox|changed
+  tags:
+    - jetbrains_toolbox
+
+- name: Launch Jetbrains Toolbox
+  shell: "~/bin/jetbrains-toolbox &"
+  when: check_jetbrains_toolbox|changed
+  tags:
+    - jetbrains_toolbox

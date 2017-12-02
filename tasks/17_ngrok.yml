@@ -1,0 +1,25 @@
+---
+- name: Check if ngrok has been installed already
+  shell: "ls -l ~/bin/ngrok"
+  register: check_ngrok
+  changed_when: check_ngrok.rc == 2
+  failed_when: check_ngrok.rc != 0 and check_ngrok.rc != 2
+  tags:
+    - ngrok
+
+- name: Download ngrok
+  get_url:
+    url: https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
+    dest: /tmp/ngrok.zip
+  when: check_ngrok|changed
+  tags:
+    - ngrok
+
+- name: Unzip ngrok archive
+  unarchive:
+    src: /tmp/ngrok.zip
+    dest: ~/bin/
+    mode: 0750
+  when: check_ngrok|changed
+  tags:
+    - ngrok

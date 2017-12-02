@@ -1,0 +1,24 @@
+---
+- name: Check if Vagrant is already installed
+  shell: dpkg-query -W vagrant
+  register: check_vagrant
+  failed_when: check_vagrant.rc > 1
+  changed_when: check_vagrant.rc == 1
+  tags:
+    - vagrant
+
+- name: Download Vagrant package
+  get_url:
+    url: https://releases.hashicorp.com/vagrant/{{ vagrant_version }}/vagrant_{{ vagrant_version }}_{{ ansible_architecture }}.deb
+    dest: /tmp/vagrant.deb
+  when: check_vagrant|changed
+  tags:
+    - vagrant
+
+- name: Install Vagrant package
+  become: yes
+  apt:
+    deb: /tmp/vagrant.deb
+  when: check_vagrant|changed
+  tags:
+    - vagrant

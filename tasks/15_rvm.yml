@@ -1,0 +1,30 @@
+---
+- name: Add RVM PPA
+  become: yes
+  apt_repository:
+    repo: ppa:rael-gc/rvm
+  register: add_rvm_ppa
+  tags:
+    - rvm
+
+- name: Update APT cache
+  become: yes
+  apt:
+    update_cache: yes
+  when: add_rvm_ppa|changed
+  tags:
+    - rvm
+
+- name: Install RVM
+  become: yes
+  package:
+    name: rvm
+  tags:
+    - rvm
+
+- name: Configure RVM
+  copy:
+    src: .rvmrc
+    dest: ~/.rvmrc
+  tags:
+    - rvm

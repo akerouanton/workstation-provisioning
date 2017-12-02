@@ -1,0 +1,25 @@
+---
+- name: Check if Nylas is already installed
+  shell: "dpkg-query -W nylas-mail"
+  register: check_nylas
+  failed_when: check_nylas.rc > 1
+  changed_when: check_nylas.rc == 1
+  tags:
+    - nylas
+
+- name: Download Nylas package
+  get_url:
+    url: https://edgehill.nylas.com/download?platform=linux-deb
+    dest: /tmp/nylas.deb
+    force: yes
+  when: check_nylas|changed
+  tags:
+    - nylas
+
+- name: Install Nylas package
+  become: yes
+  apt:
+    deb: /tmp/nylas.deb
+  when: check_nylas|changed
+  tags:
+    - nylas

@@ -1,0 +1,8 @@
+---
+- hosts: local
+  tasks:
+    - name: Upgrade to latest version available
+      become: yes
+      apt:
+        upgrade: dist
+        state: latest
