@@ -6,3 +6,4 @@
     state: present
   tags:
     - virtualbox
+    - virtualbox-ext-pack

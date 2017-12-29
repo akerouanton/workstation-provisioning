@@ -9,13 +9,15 @@
     - xclip
     - git
     - passwordsafe
-    - passwd
     - ntfs-3g
     - traceroute
     - httpie
     - whois
     - jq
     - silversearcher-ag
+    - pwgen
+    - nmap
+    - wireshark
   tags:
     - common_softwares
 
