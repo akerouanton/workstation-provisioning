@@ -26,6 +26,7 @@
     - import_tasks: tasks/15_rvm.yml
     - import_tasks: tasks/16_terraform.yml
     - import_tasks: tasks/17_ngrok.yml
+    - import_tasks: tasks/18_disable_bluetooth.yml
     - import_tasks: tasks/20_virtualbox.yml
     - import_tasks: tasks/21_vagrant.yml
     - import_tasks: tasks/22_docker.yml

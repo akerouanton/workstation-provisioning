@@ -1,0 +1,27 @@
+---
+- name: Unload bluetooth kernel module
+  become: yes
+  modprobe:
+    name: bluetooth
+    state: absent
+  ignore_errors: true
+  tags:
+    - bluetooth
+
+- name: Disable bluetooth kernel module
+  become: yes
+  lineinfile:
+    path: /etc/modprobe.d/disable-bluetooth.conf
+    line: "install bluetooth /bin/false"
+    create: yes
+  tags:
+    - bluetooth
+
+- name: Blacklist bluetooth kernel module
+  become: yes
+  lineinfile:
+    path: /etc/modprobe.d/blacklist-bluetooth.conf
+    line: "blacklist bluetooth"
+    create: yes
+  tags:
+    - bluetooth
