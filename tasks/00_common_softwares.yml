@@ -18,6 +18,7 @@
     - pwgen
     - nmap
     - wireshark
+    - mysql-workbench
   tags:
     - common_softwares
 
