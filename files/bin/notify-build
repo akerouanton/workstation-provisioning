@@ -1,0 +1,12 @@
+#!/bin/bash
+
+exec ${@}
+res=$(echo $?)
+
+if [ $res -eq 0 ];
+    notify-send "build completed!" "${@}"
+    exit 0
+else
+    notify-send "build failed!" "${@}"
+    exit $res
+fi

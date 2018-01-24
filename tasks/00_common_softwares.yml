@@ -29,3 +29,13 @@
     path: /usr/bin/vim
   tags:
     - common_softwares
+
+- name: Install utils scripts
+  copy:
+    src: "bin/{{ item }}"
+    dest: "~/bin/{{ item }}"
+    mode: 0750
+  with_items:
+    - notify-build
+  tags:
+    - common_softwares
