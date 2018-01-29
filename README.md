@@ -1,5 +1,7 @@
 # PC provisioning
 
+This repo provides an easy and fast way to bootstrap a dev workstation on any fresh Ubuntu install.
+
 ## How to use?
 
 First, install Ansible:
