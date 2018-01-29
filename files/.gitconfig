@@ -36,4 +36,6 @@
 [core]
 	excludesfile = /home/nir-/.gitignore
 [commit]
-  gpgsign = true
+	gpgsign = true
+[url "ssh://github.com:"]
+	insteadOf = https://github.com
