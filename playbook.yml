@@ -30,3 +30,4 @@
     - import_tasks: tasks/20_virtualbox.yml
     - import_tasks: tasks/21_vagrant.yml
     - import_tasks: tasks/22_docker.yml
+    - import_tasks: tasks/23_go.yml

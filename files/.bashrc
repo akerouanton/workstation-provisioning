@@ -81,4 +81,6 @@ source ~/.bash-git-prompt/gitprompt.sh
 [ -f /home/nir-/.npm/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash ] && . /home/nir-/.npm/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash
 [ -f /home/nir-/.npm/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash ] && . /home/nir-/.npm/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash
 
-export PATH="${HOME}/.config/composer/vendor/bin/:${HOME}/.npm/bin/:$PATH"
+export GOPATH="${HOME}/go"
+
+export PATH="${GOPATH}/bin/:/usr/lib/go-1.10/bin/:${HOME}/.config/composer/vendor/bin/:${HOME}/.npm/bin/:$PATH"

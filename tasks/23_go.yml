@@ -1,0 +1,46 @@
+---
+- name: Add gophers ppa
+  become: yes
+  apt_repository:
+    repo: ppa:gophers/archive
+  register: add_gophers_ppa
+  tags:
+    - go
+
+- name: Update apt cache
+  become: yes
+  apt:
+    update_cache: yes
+  when: add_gophers_ppa|changed
+  tags:
+    - go
+
+- name: Install golang-1.10
+  become: yes
+  package:
+    name: golang-1.10
+  tags:
+    - go
+
+- name: Check if dep is installed
+  command: which dep
+  register: check_dep
+  changed_when: check_dep.rc == 1
+  failed_when: check_dep.rc != 0 and check_dep.rc != 1
+  tags:
+    - go
+
+- name: Download install script for dep
+  get_url:
+    url: https://raw.githubusercontent.com/golang/dep/master/install.sh
+    dest: /tmp/dep.sh
+    mode: 0750
+  when: check_dep|changed
+  tags:
+    - go
+
+- name: Install dep
+  command: /tmp/dep.sh
+  when: check_dep|changed
+  tags:
+    - go
