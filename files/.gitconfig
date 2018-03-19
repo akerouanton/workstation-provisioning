@@ -39,3 +39,4 @@
 	gpgsign = true
 [url "ssh://github.com:"]
 	insteadOf = https://github.com
+  insteadOf = http://github.com

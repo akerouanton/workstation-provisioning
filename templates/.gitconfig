@@ -35,3 +35,5 @@
 	excludesfile = {{ ansible_user_dir }}/.gitignore
 [commit]
   gpgsign = true
+[url "ssh://github.com:"]
+  insteadOf = https://github.com
