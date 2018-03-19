@@ -1,0 +1,33 @@
+---
+- name: Install python-gdbm
+  become: yes
+  package:
+    name: "{{ item }}"
+  with_items:
+    - python-gdbm
+    - python3-gdbm
+  tags:
+    - python
+
+- name: Check presence of pyenv
+  command: which pyenv
+  register: check_pyenv
+  changed_when: check_pyenv.rc == 1
+  failed_when: check_pyenv.rc != 0 and check_pyenv.rc != 1
+  tags:
+    - python
+
+- name: Download pyenv installer
+  get_url:
+    url: https://raw.githubusercontent.com/pyenv/pyenv-installer/50829ed10f8fc4b977aec09bbe35ee7c87e1f3fd/bin/pyenv-installer
+    dest: /tmp/pyenv-installer
+    mode: 0750
+  when: check_pyenv|changed
+  tags:
+    - python
+
+- name: Execute pyenv installer
+  command: /tmp/pyenv-installer
+  when: check_pyenv|changed
+  tags:
+    - python

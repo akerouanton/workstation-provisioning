@@ -82,5 +82,10 @@ source ~/.bash-git-prompt/gitprompt.sh
 [ -f /home/nir-/.npm/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash ] && . /home/nir-/.npm/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash
 
 export GOPATH="${HOME}/go"
+export PYENV_ROOT="$HOME/.pyenv"
 
-export PATH="${GOPATH}/bin/:/usr/lib/go-1.10/bin/:${HOME}/.config/composer/vendor/bin/:${HOME}/.npm/bin/:$PATH"
+export PATH="${PYENV_ROOT}/bin:${GOPATH}/bin/:/usr/lib/go-1.10/bin/:${HOME}/.config/composer/vendor/bin/:${HOME}/.npm/bin/:$PATH"
+
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
