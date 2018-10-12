@@ -5,7 +5,7 @@
     slack_version: 2.9.0
     vagrant_version: 2.0.1
     docker_compose_version: 1.17.1
-    terraform_version: 0.11.1
+    terraform_version: 0.11.8
   tasks:
     - import_tasks: tasks/00_bootstrap.yml
     - import_tasks: tasks/00_common_softwares.yml

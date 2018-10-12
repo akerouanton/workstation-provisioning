@@ -7,11 +7,20 @@
   tags:
     - terraform
 
+- name: Check if terraform is out-of-date
+  command: "terraform --version"
+  register: check_terraform_version
+  changed_when: check_terraform_version.stdout is search("Terraform is out of date")
+  failed_when: check_terraform_version.rc != 0
+  when: check_terraform is succeeded
+  tags:
+    - terraform
+
 - name: Download terraform
   get_url:
     url: "https://releases.hashicorp.com/terraform/{{ terraform_version }}/terraform_{{ terraform_version }}_linux_amd64.zip"
     dest: /tmp/terraform.zip
-  when: check_terraform|changed
+  when: check_terraform is changed or check_terraform_version is changed
   tags:
     - terraform
 
@@ -19,6 +28,6 @@
   unarchive:
     src: /tmp/terraform.zip
     dest: ~/bin/
-  when: check_terraform|changed
+  when: check_terraform is changed or check_terraform_version is changed
   tags:
     - terraform
