@@ -24,7 +24,7 @@
 
 - name: Configure RVM
   copy:
-    src: .rvmrc
+    src: ubuntu/.rvmrc
     dest: ~/.rvmrc
   tags:
     - rvm

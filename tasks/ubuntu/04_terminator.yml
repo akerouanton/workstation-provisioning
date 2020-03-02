@@ -19,7 +19,7 @@
 
 - name: Configure terminator
   copy:
-    src: terminator_config
+    src: ubuntu/terminator_config
     dest: ~/.config/terminator/config
     backup: yes
   tags:

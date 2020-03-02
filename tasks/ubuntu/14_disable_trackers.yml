@@ -10,7 +10,7 @@
 
 - name: Configure trackers to not autostart when a session is opened
   template:
-    src: tracker-autostart.desktop.j2
+    src: ubuntu/tracker-autostart.desktop.j2
     dest: "~/.config/autostart/{{ item.path|basename }}"
   with_items: "{{ trackers.files }}"
   tags:

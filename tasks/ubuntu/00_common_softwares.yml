@@ -32,7 +32,7 @@
 
 - name: Install utils scripts
   copy:
-    src: "bin/{{ item }}"
+    src: "ubuntu/bin/{{ item }}"
     dest: "~/bin/{{ item }}"
     mode: 0750
   with_items:

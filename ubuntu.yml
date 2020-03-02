@@ -1,0 +1,34 @@
+---
+- hosts: local
+  vars:
+    jetbrains_toolbox_version: 1.6.291
+    slack_version: 2.9.0
+    vagrant_version: 2.0.1
+    docker_compose_version: 1.17.1
+    terraform_version: 0.11.8
+  tasks:
+    - import_tasks: tasks/ubuntu/00_bootstrap.yml
+    - import_tasks: tasks/ubuntu/00_common_softwares.yml
+    - import_tasks: tasks/ubuntu/01_dotfiles.yml
+    - import_tasks: tasks/ubuntu/02_gnome.yml
+    - import_tasks: tasks/ubuntu/03_git.yml
+    - import_tasks: tasks/ubuntu/04_terminator.yml
+    - import_tasks: tasks/ubuntu/05_jetbrains_toolbox.yml
+    - import_tasks: tasks/ubuntu/06_atom.yml
+    - import_tasks: tasks/ubuntu/07_htop.yml
+    - import_tasks: tasks/ubuntu/08_slack.yml
+    - import_tasks: tasks/ubuntu/09_nylas.yml
+    - import_tasks: tasks/ubuntu/10_keybase.yml
+    - import_tasks: tasks/ubuntu/11_firefox.yml
+    - import_tasks: tasks/ubuntu/12_redshift.yml
+    - import_tasks: tasks/ubuntu/13_nodejs.yml
+    - import_tasks: tasks/ubuntu/14_disable_trackers.yml
+    - import_tasks: tasks/ubuntu/15_rvm.yml
+    - import_tasks: tasks/ubuntu/16_terraform.yml
+    - import_tasks: tasks/ubuntu/17_ngrok.yml
+    - import_tasks: tasks/ubuntu/18_disable_bluetooth.yml
+    - import_tasks: tasks/ubuntu/20_virtualbox.yml
+    - import_tasks: tasks/ubuntu/21_vagrant.yml
+    - import_tasks: tasks/ubuntu/22_docker.yml
+    - import_tasks: tasks/ubuntu/23_go.yml
+    - import_tasks: tasks/ubuntu/24_python.yml

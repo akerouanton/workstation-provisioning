@@ -8,7 +8,7 @@
 
 - name: Configure redshift
   copy:
-    src: redshift.conf
+    src: ubuntu/redshift.conf
     dest: ~/.config/redshift.conf
   tags:
     - redshift

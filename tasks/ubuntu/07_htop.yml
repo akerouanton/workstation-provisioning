@@ -16,7 +16,7 @@
 
 - name: Configure htop
   copy:
-    src: htoprc
+    src: ubuntu/htoprc
     dest: ~/.config/htop/htoprc
   tags:
     - htop

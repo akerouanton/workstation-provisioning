@@ -1,7 +1,7 @@
 ---
 - name: Create symlinks for dotfiles
   copy:
-    src: "{{ item }}"
+    src: "ubuntu/{{ item }}"
     dest: ~/
   with_items:
     - .agignore

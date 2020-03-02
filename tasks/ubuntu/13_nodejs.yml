@@ -32,7 +32,7 @@
 
 - name: Configure NPM
   copy:
-    src: .npmrc
+    src: ubuntu/.npmrc
     dest: ~/.npmrc
   tags:
     - nodejs
