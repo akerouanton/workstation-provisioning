@@ -1,0 +1,15 @@
+---
+- name: Install lightdm
+  become: yes
+  package:
+    name: lightdm
+  tags:
+    - lightdm
+  
+- name: Configure lightdm
+  become: yes
+  copy:
+    src: "archlinux/etc/X11/default-display-manager"
+    dest: "/etc/X11/default-display-manager"
+  tags:
+    - lightdm

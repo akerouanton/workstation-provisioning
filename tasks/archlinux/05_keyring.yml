@@ -1,0 +1,30 @@
+---
+- name: Install Gnome Keyring
+  become: yes
+  package:
+    name: gnome-keyring
+    state: present
+  tags:
+    - keyring
+
+- name: Create the basepath for ssh-agent.service
+  file:
+    path: ~/.config/systemd/user/
+    state: directory
+  tags:
+    - keyring
+
+- name: Copy ssh-agent.service
+  copy:
+    src: archlinux/home/.config/systemd/user/ssh-agent.service
+    dest: ~/.config/systemd/user/ssh-agent.service
+  tags:
+    - keyring
+
+- name: Enable ssh-agent.service
+  systemd:
+    name: ssh-agent.service
+    scope: user
+    enabled: true
+  tags:
+    - keyring

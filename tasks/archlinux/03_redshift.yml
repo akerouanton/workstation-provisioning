@@ -1,0 +1,22 @@
+---
+- name: Install redshift
+  become: yes
+  package:
+    name: redshift
+    state: present
+  tags:
+    - redshift
+
+- name: Create redshift config directory
+  file:
+    path: ~/.config/redshift
+    state: directory
+  tags:
+    - redshift
+
+- name: Copy redshift config file
+  copy:
+    src: archlinux/home/.config/redshift/redshift.conf
+    dest: ~/.config/redshift/redshift.conf
+  tags:
+    - redshift

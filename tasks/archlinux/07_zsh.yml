@@ -1,0 +1,29 @@
+---
+- name: Install zsh
+  become: yes
+  package:
+    name: zsh
+    state: present
+  tags:
+    - zsh
+
+- name: Copy .zshrc config file
+  copy:
+    src: "archlinux/home/.zshrc"
+    dest: "~/.zshrc"
+  tags:
+    - zsh
+
+- name: Install oh-my-zsh
+  aur:
+    name: oh-my-zsh-git
+  tags:
+    - zsh
+
+- name: Ensure current user has zsh set as its login shell
+  become: true
+  user:
+    name: "{{ ansible_user_id }}"
+    shell: /bin/zsh
+  tags:
+    - zsh

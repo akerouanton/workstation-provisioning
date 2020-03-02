@@ -1,0 +1,188 @@
+---
+- name: Install i3
+  become: yes
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - i3-gaps
+    - i3lock
+  tags:
+    - wm
+
+- name: Create i3 config directory
+  file:
+    path: ~/.config/i3
+    state: directory
+  tags:
+    - wm
+
+- name: Create i3 share directory
+  file:
+    path: ~/.local/share/i3
+    state: directory
+  tags:
+    - wm
+
+- name: Copy i3 config file
+  copy:
+    src: "archlinux/home/.config/i3/config"
+    dest: "~/.config/i3/config"
+  tags:
+    - wm
+
+- name: Copy i3 scripts
+  copy:
+    src: "archlinux/home/.config/i3/scripts/"
+    dest: "~/.config/i3/scripts/"
+    mode: 0750
+  tags:
+    - wm
+
+- name: Copy background images
+  copy:
+    src: "archlinux/home/Pictures/"
+    dest: "~/Pictures/"
+  tags:
+    - wm
+
+####################
+
+# Picom is a fork of compton. It's used to add shadows around windows.
+- name: Install Picom
+  aur:
+    name: picom
+  tags:
+    - wm
+    - picom
+
+- name: Create Picom config directory
+  file:
+    path: ~/.config/picom
+    state: directory
+  tags:
+    - wm
+    - picom
+
+- name: Copy Picom config file
+  copy:
+    src: archlinux/home/.config/picom/picom.cfg
+    dest: ~/.config/picom/picom.cfg
+  tags:
+    - wm
+    - picom
+
+- name: Copy Picom launch script
+  copy:
+    src: archlinux/home/.config/picom/launch.sh
+    dest: ~/.config/picom/launch.sh
+    mode: 0750
+  tags:
+    - wm
+    - picom
+
+####################
+
+- name: Install Polybar
+  aur:
+    name: polybar
+  tags:
+    - wm
+    - polybar
+
+- name: Create Polybar config directory
+  file:
+    path: ~/.config/polybar
+    state: directory
+  tags:
+    - wm
+    - polybar
+
+- name: Copy Polybar config files
+  copy:
+    src: "archlinux/home/.config/polybar/{{ item }}"
+    dest: "~/.config/polybar/{{ item }}"
+  with_items:
+    - config
+    - modules/
+  tags:
+    - wm
+    - polybar
+
+- name: Copy Polybar launch script
+  copy:
+    src: "archlinux/home/.config/polybar/launch.sh"
+    dest: "~/.config/polybar/launch.sh"
+    mode: 0750
+  tags:
+    - wm
+    - polybar
+
+####################
+
+- name: Install Rofi
+  aur:
+    name: rofi
+  tags:
+    - wm
+    - rofi
+
+- name: Create Rofi config directory
+  file:
+    path: ~/.config/rofi
+    state: directory
+  tags:
+    - wm
+    - rofi
+
+- name: Copy Rofi config file
+  copy:
+    src: archlinux/home/.config/rofi/config
+    dest: ~/.config/rofi/config
+  tags:
+    - wm
+    - rofi
+
+####################
+
+- name: Install other packages required by xinitrc
+  become: yes
+  package:
+    name: "{{ item }}"
+  with_items:
+    - udiskie
+    - feh
+    - i3-battery-popup-git
+    - xfce4-power-manager
+  tags:
+    - wm
+
+####################
+
+- name: Install notifyd & dunst
+  become: true
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - xfce4-notifyd
+    - dunst
+  tags:
+    - wm
+    - dunst
+
+- name: Create dunst config directory
+  file:
+    path: ~/.config/dunst
+    state: directory
+  tags:
+    - wm
+    - dunst
+
+- name: Copy dunst config file
+  copy:
+    src: archlinux/home/.config/dunst/
+    dest: ~/.config/dunst/
+  tags:
+    - wm
+    - dunst

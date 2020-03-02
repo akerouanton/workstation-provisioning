@@ -1,0 +1,9 @@
+[Unit]
+Description=PlantUML server
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/docker run --name plantuml-server -d -p 127.0.0.1:8080:8080 plantuml/plantuml-server:jetty
+
+[Install]
+WantedBy=default.target

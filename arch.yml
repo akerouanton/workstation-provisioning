@@ -1,0 +1,30 @@
+---
+- hosts: local
+  tasks:
+    - import_tasks: tasks/archlinux/00_fwupd.yml
+    - import_tasks: tasks/archlinux/00_video_drivers.yml
+    - import_tasks: tasks/archlinux/01_xorg.yml
+    - import_tasks: tasks/archlinux/01_wm.yml
+    - import_tasks: tasks/archlinux/02_kitty.yml
+    - import_tasks: tasks/archlinux/03_redshift.yml
+    - import_tasks: tasks/archlinux/04_common_softwares.yml
+    - import_tasks: tasks/archlinux/05_keyring.yml
+    - import_tasks: tasks/archlinux/06_polkit.yml
+    - import_tasks: tasks/archlinux/07_zsh.yml
+    - import_tasks: tasks/archlinux/08_network_manager.yml
+    - import_tasks: tasks/archlinux/09_office_softwares.yml
+    - import_tasks: tasks/archlinux/10_htop.yml
+    - import_tasks: tasks/archlinux/11_browsers.yml
+    - import_tasks: tasks/archlinux/12_bluetooth.yml
+    - import_tasks: tasks/archlinux/20_devtools.yml
+    - import_tasks: tasks/archlinux/20_vscode.yml
+    - import_tasks: tasks/archlinux/21_python.yml
+    - import_tasks: tasks/archlinux/22_go.yml
+    - import_tasks: tasks/archlinux/23_cloud_tools.yml
+
+# Steps:
+# Dev & ops tools:
+# * nvm
+#
+# Others:
+# * hddtemp

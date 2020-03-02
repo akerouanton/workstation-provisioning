@@ -1,0 +1,30 @@
+---
+# polkit is used by nm-applet to get rights to update the NetowkrManager
+# configs
+- name: Install polkit
+  become: yes
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - polkit
+    - polkit-gnome
+  tags:
+    - polkit
+
+- name: Add NetworkManager rule to polkit
+  become: yes
+  copy:
+    src: "archlinux/etc/polkit-1/rules.d/50-org.freedesktop.NetworkManager.rules"
+    dest: "/etc/polkit-1/rules.d/50-org.freedesktop.NetworkManager.rules"
+  tags:
+    - polkit
+
+- name: Add current user to network group
+  become: yes
+  user:
+    name: "{{ ansible_user_id }}"
+    groups: network
+    append: yes
+  tags:
+    - polkit

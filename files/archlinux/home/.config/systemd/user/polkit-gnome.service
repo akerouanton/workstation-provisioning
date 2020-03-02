@@ -1,0 +1,12 @@
+[Unit]
+Description=Polkit GNOME agent
+After=X11@%i.target
+Requisite=X11@%i.target
+
+[Service]
+Type=simple
+ExecStart=/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+Environment=DISPLAY=%I
+
+[Install]
+WantedBy=default.target

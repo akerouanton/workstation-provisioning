@@ -1,0 +1,15 @@
+;;;;;;;;;;;;;;;;;;;
+;;; ROFI config ;;;
+;;;;;;;;;;;;;;;;;;;
+rofi.combi-modi:  drun
+rofi.theme:       DarkBlue
+rofi.font:        Hasklug Nerd Font Regular 13
+rofi.modi:        drun,window,ssh
+rofi.max-history-size:  10
+; Ensure rofi uses kitty as terminal
+rofi.terminal:           kitty
+rofi.ssh-command:        {terminal} {ssh-client} {host} [-p {port}]
+rofi.run-shell-command:  {terminal} {cmd}
+; Use Tab to autocomplete
+rofi.kb-row-tab:
+rofi.kb-row-select:  Tab

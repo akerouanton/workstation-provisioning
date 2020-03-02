@@ -1,0 +1,36 @@
+---
+- name: Install office softwares
+  become: yes
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - evolution # Mail
+  tags:
+    - office-softwares
+
+- name: Install Slack
+  aur:
+    name: slack-desktop
+  tags:
+    - office-softwares
+    - slack
+
+- name: Install WPS Office
+  aur:
+    name: "{{ item }}"
+  with_items:
+    - wps-office
+    # - wps-office-extension-french-dictionnary
+    - ttf-wps-fonts
+  tags:
+    - office-softwares
+    - wps-office
+
+# evince is cool but it doesn't support annotations :/
+- name: Install Acrobat Reader
+  aur:
+    name: acroread  # PDF viewer
+  tags:
+    - office-softwares
+    - pdf-reader

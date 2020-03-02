@@ -1,0 +1,16 @@
+---
+- name: Install cloud SDKs
+  aur:
+    name: "{{ item }}"
+  with_items:
+    - doctl-bin
+    - google-cloud-sdk
+  tags:
+    - cloud-sdk
+
+- name: Install awscli
+  pip:
+    name: awscli
+    extra_args: "--user"
+  tags:
+    - cloud-sdk

@@ -1,0 +1,43 @@
+---
+- name: Install VSCode
+  become: yes
+  package:
+    name: code
+  tags:
+    - vscode
+
+- name: List currently installed VSCode extensions
+  command: "code --list-extensions"
+  register: vscode_extensions
+  failed_when: vscode_extensions.rc != 0
+  changed_when: false
+  tags:
+    - vscode
+
+- name: Install VSCode extensions
+  command: "code --install-extension {{ item }}"
+  with_items:
+    - alefragnani.Bookmarks
+    - coolbear.systemd-unit-file
+    - cssho.vscode-svgviewer
+    - redhat.vscode-xml
+    - EditorConfig.EditorConfig
+    - jebbs.plantuml
+    - EFanZh.graphviz-preview
+    - eamodio.gitlens
+    - lextudio.restructuredtext
+    - mikestead.dotenv
+    - mauve.terraform
+    - ms-vscode.Go
+    - msysyamamoto.vscode-fluentd
+    - VisualStudioExptTeam.vscodeintellicode
+    - octref.vetur
+    - ms-python.python
+    - vscode-icons-team.vscode-icons
+    - monokai.theme-monokai-pro-vscode
+    - rebornix.ruby
+    # - magicstack.MagicPython
+    # - Nimda.deepdark-material
+  when: item not in vscode_extensions.stdout
+  tags:
+    - vscode

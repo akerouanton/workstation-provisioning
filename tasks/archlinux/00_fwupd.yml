@@ -1,0 +1,11 @@
+---
+- name: Install fwupd
+  become: yes
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - fwupd
+    - gnome-firmware
+  tags:
+    - fwupd

@@ -1,0 +1,118 @@
+---
+- name: Install other common GUI softwares
+  become: yes
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - flameshot
+    # Following package is responsible of starting autostart entries
+    - gnome-tweaks
+    - gnome-calculator
+    - gnome-disk-utility
+    - nemo
+    - keybase-gui
+    - papirus-icon-theme
+    # NTFS driver is needed to access external hard drives
+    - ntfs-3g
+    - xclip
+  tags:
+    - common-softwares
+
+- name: Install common GUI softwares from AURs
+  aur:
+    name: "{{ item }}"
+  with_items:
+    # arandr is still simpler to use when doing presentations on
+    # never-seen-before devices.
+    - arandr
+    - passwordsafe
+    - spotify
+  tags:
+    - common-softwares
+
+- name: Copy autostart config files
+  copy:
+    src: "archlinux/home/.config/autostart/"
+    dest: "~/.config/autostart/"
+  tags:
+    - common-softwares
+    - xinitrc
+
+####################
+
+- name: Install nerd-fonts
+  aur:
+    name: nerd-fonts-complete-mono-glyphs
+  tags:
+    - common-softwares
+    - fonts
+
+- name: Copy fontconfig config file
+  copy:
+    src: "archlinux/home/.config/fontconfig/"
+    dest: "~/.config/fontconfig"
+  tags:
+    - common-softwares
+    - fonts
+
+####################
+
+- name: Install Pulseaudio
+  become: yes
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - pulseaudio
+    - pavucontrol
+  tags:
+    - common-softwares
+
+####################
+
+- name: Install softwares for (de)compression
+  become: yes
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - p7zip
+    - unzip
+  tags:
+    - common-softwares
+
+####################
+
+- name: Install Conky
+  become: yes
+  package:
+    name: conky
+    state: present
+  tags:
+    - common-softwares
+    - conky
+
+- name: Create Conky config directory
+  file:
+    path: ~/.config/conky
+    state: directory
+  tags:
+    - common-softwares
+    - conky
+
+####################
+
+- name: Install other common CLI tools
+  become: yes
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - tree
+    - sysdig
+    - pwgen
+    - exa
+    - bat
+  tags:
+    - common-softwares

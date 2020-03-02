@@ -1,0 +1,23 @@
+---
+# See https://sw.kovidgoyal.net/kitty/
+- name: Install Kitty
+  become: yes
+  package:
+    name: kitty
+    state: present
+  tags:
+    - kitty
+
+- name: Create Kitty config directory
+  file:
+    path: ~/.config/kitty
+    state: directory
+  tags:
+    - kitty
+
+- name: Copy Kitty config file
+  copy:
+    src: archlinux/home/.config/kitty/kitty.conf
+    dest: ~/.config/kitty/kitty.conf
+  tags:
+    - kitty

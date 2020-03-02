@@ -1,0 +1,22 @@
+---
+- name: Install other common CLI tools
+  become: yes
+  package:
+    name: htop
+    state: present
+  tags:
+    - htop
+
+- name: Create htop config directory
+  file:
+    path: ~/.config/htop
+    state: directory
+  tags:
+    - htop
+
+- name: Copy htop config
+  copy:
+    src: "archlinux/home/.config/htop/htoprc"
+    dest: "~/.config/htop/htoprc"
+  tags:
+    - htop

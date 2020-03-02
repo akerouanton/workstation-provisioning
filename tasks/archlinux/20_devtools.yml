@@ -1,0 +1,52 @@
+---
+- name: Install generic dev & ops tools
+  become: yes
+  package:
+    name: "{{ item }}"
+  with_items:
+    - git
+    - terraform
+    - docker
+    - docker-compose
+    - httpie
+    - jq
+    - yq
+    - kubectl
+    - filezilla
+    - vagrant
+    - virtualbox
+    - virtualbox-host-modules-arch
+    # Network debugging tools
+    - bind-tools
+    - socat
+    - tcpdump
+    - traceroute
+    - whois
+    - nmap
+    - wireshark-qt
+  tags:
+    - devtools
+
+- name: Install Jetbrains Toolbox
+  aur:
+    name: jetbrains-toolbox
+  tags:
+    - devtools
+
+- name: Configure Git
+  copy:
+    src: archlinux/home/.config/git/
+    dest: ~/.config/git
+  tags:
+    - devtools
+
+- name: Install Github CLI
+  aur:
+    name: github-cli
+  tags:
+    - devtools
+
+- name: Add plantuml.service
+  copy:
+    src: archlinux/home/.config/systemd/user/plantuml.service
+    dest: ~/.config/systemd/user/plantuml.service

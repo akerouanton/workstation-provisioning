@@ -1,0 +1,11 @@
+---
+- name: Install pip, pyenv and pipenv
+  become: yes
+  package:
+    name: "{{ item }}"
+  with_items:
+    - python-pip
+    - pyenv
+    - python-pipenv
+  tags:
+    - python

@@ -1,0 +1,65 @@
+[alias]
+	st = status
+	s = status
+	co = checkout
+	d = diff
+	dc = diff --cached
+	cane = commit --amend --no-edit
+	acane = commit --all --amend --no-edit
+	rbc = rebase --continue
+	pf = push --force-with-lease
+	bl = branch -l
+	p = push
+	cb = checkout -b
+	bmv = branch -m
+	rba = rebase --abort
+	cfix = commit --fixup
+	cafix = commit --all --fixup
+	rb = rebase
+	br = branch -r
+	rp = remote prune
+	bd = branch -d
+	bdf = branch -D
+	cp = cherry-pick
+	aliases = config --get-regexp '^alias'
+	ri = rebase -i
+	rbi = rebase -i
+	cpc = cherry-pick --continue
+	cpa = cherry-pick --abort
+	pt = push --tags
+	amend = commit --amend
+	pn = push origin refs/notes/*
+	fn = fetch origin refs/notes/*:refs/notes/*
+	# tags = for-each-ref --format='%(if)%(committerdate)%(then)%(committerdate)%(else)%(*committerdate)%(end) %(refname:lstrip=2)' refs/tags/*
+	tags = for-each-ref --format='%(committerdate) %(refname:strip=2)' refs/tags/*
+	hooks = !/home/akerouanton/.githooks/bin/githooks
+[user]
+	email = albin.kerouanton@knplabs.com
+	name = Albin Kerouanton
+	signingkey = CBDB1864
+[push]
+	default = simple
+[rebase]
+	autosquash = true
+[core]
+	excludesfile = /home/akerouanton/.config/git/.gitignore
+	autocrlf = input
+	editor = vim
+[commit]
+	gpgsign = true
+	template = /home/akerouanton/.config/git/message_template
+[url "ssh://github.com:"]
+    insteadOf = https://github.com
+    insteadOf = http://github.com
+[gpg]
+    program = "/usr/bin/gpg2"
+[difftool]
+    prompt = false
+[init]
+	templateDir = y
+[githooks "autoupdate"]
+	enabled = Y
+[githooks "previous"]
+	searchdir = /home/akerouanton
+[pager]
+    branch = false

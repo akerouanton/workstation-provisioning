@@ -1,0 +1,46 @@
+---
+- name: Install Xorg packages
+  become: yes
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    # Archlinux has a "xorg" group package, which includes the "xorg-apps" group. But the latter group more softwares than really needed.
+    - xorg-server
+    - xorg-setxkbmap
+    - xorg-xauth
+    - xorg-xbacklight
+    - xorg-xclock
+    - xorg-xinit
+    - xorg-xlsfonts
+    - xorg-xmodmap
+    - xorg-xrandr
+    - xautolock
+  tags:
+    -  xorg
+
+- name: Copy Touchpad config file
+  become: yes
+  copy:
+    src: archlinux/etc/X11/xorg.conf.d/30-touchpad.conf
+    dest: /etc/X11/xorg.conf.d/30-touchpad.conf
+  tags:
+    - xorg
+
+- name: Copy Xorg config files
+  copy:
+    src: "archlinux/home/{{ item }}"
+    dest: "~/{{ item }}"
+  with_items:
+    - ".xinitrc"
+    - ".Xresources"
+  tags:
+    - xorg
+
+- name: Copy screen-layouts scripts
+  copy:
+    src: "archlinux/home/.config/screen-layouts/"
+    dest: "~/.config/screen-layouts/"
+    mode: 0750
+  tags:
+    - xorg

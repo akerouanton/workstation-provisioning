@@ -1,0 +1,19 @@
+---
+- name: Install Bluez & Blueman
+  become: yes
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - bluez
+    - blueman
+    - pulseaudio-bluetooth
+  tags:
+    - bluetooth
+
+- name: Enable bluetooth service
+  systemd:
+    name: bluetooth
+    enabled: true
+  tags:
+    - bluetooth

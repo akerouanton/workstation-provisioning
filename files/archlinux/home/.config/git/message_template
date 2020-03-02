@@ -1,0 +1,19 @@
+# Try to answer these questions:
+# * Why?
+# * How?
+# * What are the consequences?
+#
+# And remember to add a link to the related Jira/Taiga/Trello/GH task
+#
+# Line wrapping:
+# * Subject line should be 50 characters long
+# * Description should be wrapped at 72 characters
+#
+# Jira smart commits
+# * https://confluence.atlassian.com/fisheye/using-smart-commits-960155400.html
+#
+# Some other useful links
+# * https://thoughtbot.com/blog/better-commit-messages-with-a-gitmessage-template
+# * https://thoughtbot.com/blog/5-useful-tips-for-a-better-commit-message
+# * https://www.youtube.com/watch?v=PJjmw9TRB7s
+# * https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html

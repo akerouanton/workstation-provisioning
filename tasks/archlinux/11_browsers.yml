@@ -1,0 +1,16 @@
+---
+- name: Install firefox and chromium
+  become: yes
+  package:
+    name: "{{ item }}"
+  with_items:
+    - chromium
+    - firefox
+  tags:
+    - browsers
+
+- name: Install google-chrome
+  aur:
+    name: google-chrome
+  tags:
+    - browsers

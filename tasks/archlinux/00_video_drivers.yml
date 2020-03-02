@@ -1,0 +1,23 @@
+---
+- name: Install Intel GPU tools
+  become: yes
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - intel-gpu-tools
+    - libva-utils
+  tags:
+    - video-drivers
+
+- name: Install video drivers
+  become: yes
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - xf86-video-intel
+    - mesa
+    # - libva-intel-driver
+  tags:
+    - video-drivers

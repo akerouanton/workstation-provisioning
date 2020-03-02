@@ -1,0 +1,15 @@
+__pycache__/
+.mypy_cache/
+.pytest_cache/
+.idea/
+.venv/
+.vscode/
+.vagrant/
+*.pem
+*.sql
+*.sql.gz
+*.wasm
+.php_cs.cache
+gcloud-service-account.json
+gcloud-sa.json
+*.egg-info/
